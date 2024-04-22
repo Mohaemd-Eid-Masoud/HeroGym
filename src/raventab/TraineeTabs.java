@@ -590,7 +590,7 @@ public class TraineeTabs extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(evt.getSource().equals(jButton1)){
-            MenuPage menu=new MenuPage(); menu.setVisible(true);
+            MenuPage menu=new MenuPage(); menu.setVisible(true); dispose();
           
         
         }
@@ -666,7 +666,7 @@ public class TraineeTabs extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         if(evt.getSource().equals(jButton6)){
-            MenuPage menu=new MenuPage(); menu.setVisible(true);
+            MenuPage menu=new MenuPage(); menu.setVisible(true); dispose();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
