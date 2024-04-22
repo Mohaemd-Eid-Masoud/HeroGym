@@ -1,0 +1,148 @@
+<DOCTYPE>
+<html>
+<body>
+<style>
+body{
+  background: #faf8e7;
+}
+
+.clock {
+  position: relative;
+  background: #fff;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px #fff, 
+              inset 3px 2px 3px 3px rgba(0,0,0,0.1);
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  margin: 80px auto 0;
+  width: 200px;
+  margin: 80px auto 0;
+  transition: all 0.3s;
+}
+
+/* default hand - seconds*/
+.hand {
+  position: absolute;
+  background: #2ECC71;
+  border-radius: 50%;
+  display: flex;
+  height: 15px;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  z-index: 2;
+  transition: all 0.3s;
+}
+
+.hand:after {
+  content: '';
+  height: 90px;
+  width: 2px;
+  background: #2ECC71;
+  border-radius: 4px;
+  top: -45px;
+  position: relative;
+  animation: timer 60s steps(60, start) infinite;
+  transform-origin: 48% 100%;
+  transition: all 0.3s;
+}
+
+/* minutes*/ 
+.minutes:after{
+  background: #9E9E9E;
+  height: 80px;
+  width: 4px;
+  top: -40px;
+  transform-origin: 50% 100%;
+  animation: timer 3600s steps(60, start) infinite;
+}
+
+/* hours */ 
+.hours:after{
+  background: #9E9E9E;
+  height: 60px;
+  width: 8px;
+  border-radius: 8px;
+  top: -30px;
+  transform-origin: 50% 100%;
+  animation: timer-hours 86400s steps(60, start) infinite;
+  z-index: -1;
+}
+
+.status{
+  position: absolute;
+  transform: translateY(50px);
+  transition: all 0.3s;
+  color: #2ECC71;
+}
+
+.status.paused{
+  transform: translateY(70px);
+  opacity: 0;
+  color: #FC7F6F;
+}
+
+.clock:hover .status.paused{
+  transform: translateY(50px);
+  opacity: 1;
+}
+
+.clock:hover .status.playing{
+  transform: translateY(70px);
+  opacity: 0;
+}
+
+
+.clock:hover{
+  background: #f1f1f1;
+  cursor: pointer;
+  box-shadow: 0 0 0 15px #fff, 
+              inset 3px 2px 3px 3px rgba(0,0,0,0.1);
+}
+
+.clock:hover .seconds,
+.clock:hover .seconds:after {
+   background: #FC7F6F; 
+}
+
+.clock:hover .hand:after {
+  animation-play-state: paused;
+}
+
+.h1 {
+  color: #999;
+  font-size: 13px;
+  padding-top: 40px;
+  text-align: center;
+}
+
+@keyframes timer {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes timer-hours {
+  0% {
+    transform: rotate(-300deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}</style>
+<div class='clock'>
+  <div class='hand hours'></div>
+  <div class='hand minutes'></div>
+  <div class='hand seconds'></div>
+  <span class="status playing"> ⁄„· «·¬‰</span>
+  <span class="status paused">„ Êﬁ›Â „ƒﬁ « «·¬‰</span>
+</div>
+<div class='h1'>„—— «·„ƒ‘— ⁄·Ï «·”«⁄…</div>
+</body>
+</html>
