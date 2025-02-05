@@ -15,9 +15,9 @@ private JPanel contentPane;
     private int currentSlideIndex;
 
     private String[] imagePaths = {
-            "D:\\content\\HeroGymLastEdition\\src\\img\\login.jpg",
-            "D:\\content\\HeroGymLastEdition\\src\\img\\trainer.png",
-            "D:\\content\\HeroGymLastEdition\\src\\img\\training.png"
+            "C:\\Users\\moham\\OneDrive\\Documents\\HeroGymLastEdition\\src\\img\\login.jpg",
+            "C:\\Users\\moham\\OneDrive\\Documents\\HeroGymLastEdition\\src\\img\\trainer.png",
+            "C:\\Users\\moham\\OneDrive\\Documents\\HeroGymLastEdition\\src\\img\\training.png"
     };
     
     public SlideShowApp() {

@@ -6,14 +6,12 @@ package WelcomePages;
 
 import menuPackage.MenuPage;
 import newpackage.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Scanner;
-import javax.swing.JOptionPane;
-
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 /**
  *
  * @author Paragon
@@ -21,18 +19,32 @@ import javax.swing.JOptionPane;
 public class LoginP extends javax.swing.JFrame {
 
     private Receptionist recp;
+    private JLabel background; // JLabel for background image
+
     /**
      * Creates new form LoginP
      */
     public LoginP() {
         initComponents();
-            Tools.dbConnection();
+        initBackground();
+        Tools.dbConnection();
     }
     public LoginP(Receptionist recp){
         this();
         this.recp=recp;
     }
-
+       private void initBackground() {
+        try {
+            BufferedImage img = ImageIO.read(new File("C:\\Users\\moham\\OneDrive\\Documents\\HeroGymLastEdition\\src\\img\\login.jpg"));
+            ImageIcon icon = new ImageIcon(img);
+            background = new JLabel(icon);
+            background.setBounds(0, 0, 1366, 768); // Adjust the size based on your JFrame size
+            jLabel8.add(background);
+            jLabel8.setComponentZOrder(background, 0); // Ensure background is at the bottom
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,16 +144,16 @@ public class LoginP extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(470, 470, 470)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addComponent(jLabel6)))
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -160,7 +172,7 @@ public class LoginP extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -184,6 +196,16 @@ public class LoginP extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 102));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 1370, -1));
+
+        jLabel8.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabel8AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 710));
 
         setSize(new java.awt.Dimension(1366, 710));
@@ -205,7 +227,7 @@ public class LoginP extends javax.swing.JFrame {
 ////                dispose();
 
      //ReceptionDAL recp=new ReceptionDAL();
-String Email=txtEmail.getText();
+    String Email=txtEmail.getText();
     String pass=txtPass.getText();
     ReceptionistDAL recepDAL=new ReceptionistDAL(Tools.dbConnection());
     ReceptionistBLL recepBLL=new ReceptionistBLL(recepDAL);
@@ -231,26 +253,28 @@ String Email=txtEmail.getText();
 //             JOptionPane.showMessageDialog(null, "Invalid email or password.");
          
  
- }
-
-    
-    
-        
-        
-            
+ }          
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if (evt.getSource().equals(jButton2)){
+            System.exit(WIDTH);
+            dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-        if(evt.getSource().equals(txtEmail)){
-            System.exit(WIDTH);
-            dispose();
-        }
+//        if(evt.getSource().equals(txtEmail)){
+//            System.exit(WIDTH);
+//            dispose();
+//        }
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void jLabel8AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel8AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8AncestorAdded
 
     /**
      * @param args the command line arguments

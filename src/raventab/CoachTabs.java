@@ -591,10 +591,10 @@ public class CoachTabs extends javax.swing.JFrame {
     int age=Integer.parseInt(newAge);
     String Address =  jTextField7.getText();
     String special=jTextField9.getText();
-        statement.setString(1, newName);
+    statement.setString(1, newName);
     statement.setString(2, Address);
     statement.setString(3, special);
-        statement.setInt(4, age);
+    statement.setInt(4, age);
     statement.setString(5, newname);
 
     // Execute the update
@@ -626,7 +626,7 @@ public class CoachTabs extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         if(evt.getSource().equals(jButton6)){
-        MenuPage menu=new MenuPage(); menu.setVisible(true);
+        MenuPage menu=new MenuPage(); menu.setVisible(true); dispose();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -646,7 +646,7 @@ public class CoachTabs extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
        if(evt.getSource().equals(jButton1)){
-        MenuPage menu=new MenuPage(); menu.setVisible(true);
+        MenuPage menu=new MenuPage(); menu.setVisible(true); dispose();
                 }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -671,7 +671,7 @@ public class CoachTabs extends javax.swing.JFrame {
             // Process the results
             while (resultSet.next()) {
                 String memberName = resultSet.getString("CoachName");
-                 String Address = resultSet.getString("Address");
+                String Address = resultSet.getString("Address");
                 int age = resultSet.getInt("age");
                 String level = resultSet.getString("experience");
 
