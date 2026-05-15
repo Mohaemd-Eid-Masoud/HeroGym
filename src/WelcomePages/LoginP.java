@@ -213,47 +213,25 @@ public class LoginP extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-     if(evt.getSource().equals(btnLogin)){
-     
-                MenuPage M=new MenuPage();
-                M.setVisible(true);
-                dispose();
-           
-////        if(recep.getEmail().equals(Email))
-////            if(recep.getUserPassword().equals(pass)){
-////                System.out.println(recep.getUserPassword());
-////                    MenuPage l=new MenuPage();
-////                l.setVisible(true);
-////                dispose();
+        String email = txtEmail.getText().trim();
+        String pass = new String(txtPass.getPassword()).trim();
 
-     //ReceptionDAL recp=new ReceptionDAL();
-    String Email=txtEmail.getText();
-    String pass=txtPass.getText();
-    ReceptionistDAL recepDAL=new ReceptionistDAL(Tools.dbConnection());
-    ReceptionistBLL recepBLL=new ReceptionistBLL(recepDAL);
-    Receptionist recep=recepDAL.getReceptionistByEmail(Email);
-        System.out.println(recep.getEmail()+""+recep.getUserPassword());
-        
-////        if(recep.getEmail().equals(Email))
-////            if(recep.getUserPassword().equals(pass)){
-////                System.out.println(recep.getUserPassword());
-////                    MenuPage l=new MenuPage();
-////                l.setVisible(true);
-////                dispose();
-//}
-//         Receptionist recep=recepDAL.getReceptionistByEmail(email);
-//         System.out.println(recep.getEmail());
-//             if(recep.getEmail().equals(email)){
-//                 if(recep.getUserPassword().equals(pass)){
-//                     MenuPage menu=new MenuPage(); menu.setVisible(true);
-//                     dispose();
-//                 }
-//             }
-//         }else{
-//             JOptionPane.showMessageDialog(null, "Invalid email or password.");
-         
- 
- }          
+        if (email.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter your email and password.", "Login", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        ReceptionistDAL recepDAL = new ReceptionistDAL(Tools.dbConnection());
+        Receptionist recep = recepDAL.getReceptionistByEmail(email);
+
+        if (recep != null && recep.getUserPassword() != null && recep.getUserPassword().equals(pass)) {
+            MenuPage menu = new MenuPage();
+            menu.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid email or password. Please try again.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            txtPass.setText("");
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -1,45 +1,43 @@
 package newpackage;
 
-
 import java.sql.Date;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
-/**
- *
- * @author WIN(10)X64
- */
 public class Membership {
+    private int membershipID;
+    private int memberID;
     private int PAidamount;
     private Date StartDate;
     private Date EndDate;
-    public Membership(){       
-    }
-    public Membership(int PAidamount,Date StartDate,Date EndDate){
-        this.PAidamount=PAidamount;
-        this.StartDate=StartDate;
-        this.EndDate=EndDate;
+
+    public Membership() {       
     }
 
-    Membership(int paidAmount, java.util.Date startDate, java.util.Date endDate) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Membership(int PAidamount, Date StartDate, Date EndDate) {
+        this.PAidamount = PAidamount;
+        this.StartDate = StartDate;
+        this.EndDate = EndDate;
     }
 
+    public int getMembershipID() {
+        return membershipID;
+    }
 
-    /**
-     * @return the PAidamount
-     */
+    public void setMembershipID(int membershipID) {
+        this.membershipID = membershipID;
+    }
+
+    public int getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(int memberID) {
+        this.memberID = memberID;
+    }
+
     public int getPAidamount() {
         return PAidamount;
     }
 
-    /**
-     * @param PAidamount the PAidamount to set
-     */
     public void setPAidamount(int PAidamount) {
         this.PAidamount = PAidamount;
     }
@@ -59,5 +57,4 @@ public class Membership {
     public Date getEndDate() {
         return EndDate;
     }
-    
 }

@@ -603,62 +603,40 @@ public class TraineeTabs extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField10ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        if(evt.getSource().equals(jButton4)){
-            System.exit(WIDTH);
-        }
+        System.exit(0);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-      /*  MemberDAL memb=new MemberDAL();
-        String Name=jTextField10.getText();
-        String age=jTextField11.getText();
-        int Age=Integer.parseInt(age);
-        String level=(String) jComboBox2.getSelectedItem();
-        Member mem=new Member();
-        mem.setAge(Age);
-        mem.setMemberName(Name);
-        mem.setLevel(level);
+        String searchName = jTextField9.getText().trim();
+        if (searchName.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Enter the member name to update in the Search field.", "Update Member", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         try {
-            memb.updateMember(mem);
-        } catch (SQLException ex) {
-            Logger.getLogger(TraineeTabs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }*/
-      try {
-          String updateQuery = "UPDATE tblMember " +
-            "SET MemberName = ?, Age = ?, Level = ? " +
-            "WHERE MemberName = ?";
-    // Prepare the statement
-    PreparedStatement statement = Tools.dbConnection().prepareStatement(updateQuery);
-
-    // Set the new values
-    String newname=jTextField9.getText();
-    String newName = jTextField10.getText();  
-    String newAge = jTextField11.getText();  
-    int age=Integer.parseInt(newAge);
-    String level = (String) jComboBox2.getSelectedItem();
-
-    statement.setString(1, newName);
-    statement.setInt(2, age);
-    statement.setString(3, level);
-    statement.setString(4, newname);
-
-    // Execute the update
-    int rowsAffected = statement.executeUpdate();
-
-    if (rowsAffected > 0) {
-        System.out.println("Update successful! " + rowsAffected + " row(s) affected.");
-    } else {
-        System.out.println("No rows affected. Member not found or values unchanged.");
-    }
-
-    // Close the statement
-    statement.close();
-} catch (SQLException e) {
-    e.printStackTrace();
-    // Handle any errors that may occur during the update
-}
+            MemberDAL memberDAL = new MemberDAL();
+            Member mem = memberDAL.getMemberByName(searchName);
+            if (mem == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Member not found: " + searchName, "Update Member", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String newName = jTextField10.getText().trim();
+            String ageStr = jTextField11.getText().trim();
+            String level = (String) jComboBox2.getSelectedItem();
+            if (newName.isEmpty() || ageStr.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Name and Age are required.", "Update Member", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            mem.setMemberName(newName);
+            mem.setAge(Integer.parseInt(ageStr));
+            mem.setLevel(level != null && level.trim().isEmpty() ? null : level);
+            memberDAL.updateMember(mem);
+            javax.swing.JOptionPane.showMessageDialog(this, "Member updated successfully!", "Update Member", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Age must be a valid number.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -705,51 +683,29 @@ public class TraineeTabs extends javax.swing.JFrame {
     }//GEN-LAST:event_IDActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-              String nameToSearch = jTextField9.getText();  // Replace with the name you want to search
-
+        String nameToSearch = jTextField9.getText().trim();
+        if (nameToSearch.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Enter a member name to search.", "Search Member", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         try {
-            // Establish the database connection
-           Tools.dbConnection();
-            // Create the SQL query
-            String query = "SELECT MemberName, Age, Level FROM tblMember WHERE MemberName = ?";
-
-            // Create the prepared statement
-            PreparedStatement statement = Tools.dbConnection().prepareStatement(query);
-            statement.setString(1, nameToSearch);
-
-            // Execute the query
-            ResultSet resultSet = statement.executeQuery();
-
-            // Process the results
-            while (resultSet.next()) {
-                String memberName = resultSet.getString("MemberName");
-                int age = resultSet.getInt("Age");
-                String level = resultSet.getString("Level");
-
-              //  System.out.println("Name: " + memberName);
-              //  System.out.println("Age: " + age);
-               // System.out.println("Level: " + level);
-               // System.out.println("-----------------------");
-               jTextField10.setText(memberName);
-               jTextField10.setVisible(true);
-              String Age=String.valueOf(age);
-               jTextField11.setText(Age);
-               jTextField11.setVisible(true);
-               jComboBox2.setToolTipText(level);
-               jComboBox2.setVisible(true);
+            MemberDAL memberDAL = new MemberDAL();
+            Member mem = memberDAL.getMemberByName(nameToSearch);
+            if (mem != null) {
+                jTextField10.setText(mem.getMemberName());
+                jTextField11.setText(String.valueOf(mem.getAge()));
+                String lvl = mem.getLevel() != null ? mem.getLevel() : "";
+                jComboBox2.setSelectedItem(lvl);
+                jTextField10.setVisible(true);
+                jTextField11.setVisible(true);
+                jComboBox2.setVisible(true);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Member not found: " + nameToSearch, "Search Member", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
-
-            // Close the resources
-            resultSet.close();
-            statement.close();
-            Tools.dbConnection().close();
         } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
-  }
-
-
-
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
@@ -757,11 +713,7 @@ public class TraineeTabs extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField11ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        if(evt.getSource().equals(jButton2)){
-            System.exit(WIDTH);
-            dispose();
-        }
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

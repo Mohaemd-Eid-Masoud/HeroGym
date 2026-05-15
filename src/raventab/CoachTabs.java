@@ -4,15 +4,12 @@
  */
 package raventab;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import menuPackage.MenuPage;
 import newpackage.Coach;
 import newpackage.CoachDAL;
-import newpackage.Tools;
 
 /**
  *
@@ -570,57 +567,46 @@ public class CoachTabs extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        if(evt.getSource().equals(jButton2)){
-           System.exit(0);
-        }
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-  try {
-          String updateQuery = "UPDATE tblCoach " +
-            "SET CoachName = ?, Address = ?, experience = ?,age = ? " +
-            "WHERE CoachName = ?";
-    // Prepare the statement
-    PreparedStatement statement = Tools.dbConnection().prepareStatement(updateQuery);
-
-    // Set the new values
-    String newname=jTextField8.getText();
-    String newName = jTextField4.getText();  
-    String newAge = jTextField5.getText();  
-    int age=Integer.parseInt(newAge);
-    String Address =  jTextField7.getText();
-    String special=jTextField9.getText();
-    statement.setString(1, newName);
-    statement.setString(2, Address);
-    statement.setString(3, special);
-    statement.setInt(4, age);
-    statement.setString(5, newname);
-
-    // Execute the update
-    int rowsAffected = statement.executeUpdate();
-
-    if (rowsAffected > 0) {
-        System.out.println("Update successful! " + rowsAffected + " row(s) affected.");
-    } else {
-        System.out.println("No rows affected. Member not found or values unchanged.");
-    }
-
-    // Close the statement
-    statement.close();
-} catch (SQLException e) {
-    e.printStackTrace();
-    // Handle any errors that may occur during the update
-}
-        // TODO add your handling code here:
+        String searchName = jTextField8.getText().trim();
+        if (searchName.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Enter the coach name to update in the Search field.", "Update Coach", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            CoachDAL coachDAL = new CoachDAL();
+            Coach coach = coachDAL.getCoachByName(searchName);
+            if (coach == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Coach not found: " + searchName, "Update Coach", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String newName = jTextField4.getText().trim();
+            String ageStr = jTextField5.getText().trim();
+            String address = jTextField7.getText().trim();
+            String specialist = jTextField9.getText().trim();
+            if (newName.isEmpty() || ageStr.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Name and Age fields are required.", "Update Coach", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            coach.setcoachName(newName);
+            coach.setAge(Integer.parseInt(ageStr));
+            coach.setAddress(address);
+            coach.setSpecialist(specialist);
+            coachDAL.updateCoach(coach);
+            javax.swing.JOptionPane.showMessageDialog(this, "Coach updated successfully!", "Update Coach", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Age must be a valid number.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        if(evt.getSource().equals(jButton5)){
-            System.exit(WIDTH);
-            dispose();
-        }
+        System.exit(0);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -635,11 +621,37 @@ public class CoachTabs extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        if(evt.getSource().equals(jButton3)){
-            CoachDAL COACH=new CoachDAL(); 
-            Coach coac=new Coach();
-            String name=jTextField6.getText();
+        String name = jTextField6.getText().trim();
+        String ageStr = jTextField2.getText().trim();
+        String address = jTextField1.getText().trim();
+        String gender = jRadioButton1.isSelected() ? "Male" : (jRadioButton2.isSelected() ? "Female" : "");
+        String specialist = (String) jComboBox1.getSelectedItem();
+        String password = new String(jPasswordField1.getPassword()).trim();
+
+        if (name.isEmpty() || ageStr.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Name and Age are required.", "Submit Coach", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            CoachDAL coachDAL = new CoachDAL();
+            Coach coach = new Coach();
+            coach.setcoachName(name);
+            coach.setAge(Integer.parseInt(ageStr));
+            coach.setAddress(address);
+            coach.setGender(gender);
+            coach.setSpecialist(specialist);
+            coach.setUserPassword(password);
+            coachDAL.createCoach(coach);
+            javax.swing.JOptionPane.showMessageDialog(this, "Coach added successfully!", "Submit Coach", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            // Clear fields
+            jTextField6.setText(""); jTextField2.setText("");
+            jTextField1.setText(""); jPasswordField1.setText("");
+            jRadioButton1.setSelected(false); jRadioButton2.setSelected(false);
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Age must be a valid number.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -651,54 +663,28 @@ public class CoachTabs extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-              String nameToSearch = jTextField8.getText();  // Replace with the name you want to search
-
+        String nameToSearch = jTextField8.getText().trim();
+        if (nameToSearch.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Enter a coach name to search.", "Search Coach", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         try {
-            // Establish the database connection
-           Tools.dbConnection();
-            // Create the SQL query
-            String query = "SELECT CoachName, Address, age,experience FROM tblCoach WHERE CoachName = ?";
-
-            // Create the prepared statement
-            PreparedStatement statement = Tools.dbConnection().prepareStatement(query);
-            statement.setString(1, nameToSearch);
-
-            // Execute the query
-            ResultSet resultSet = statement.executeQuery();
-
-            // Process the results
-            while (resultSet.next()) {
-                String memberName = resultSet.getString("CoachName");
-                String Address = resultSet.getString("Address");
-                int age = resultSet.getInt("age");
-                String level = resultSet.getString("experience");
-
-              //  System.out.println("Name: " + memberName);
-              //  System.out.println("Age: " + age);
-               // System.out.println("Level: " + level);
-               // System.out.println("-----------------------");
-               jTextField4.setText(memberName);
-               jTextField4.setVisible(true);
-              String Age=String.valueOf(age);
-               jTextField5.setText(Age);
-               jTextField5.setVisible(true);
-               jTextField7.setText(Address);
-               jTextField7.setVisible(true);
-                jTextField7.getText();
-               jTextField7.setVisible(true);
-               jTextField9.setText(level);
-               jTextField9.setVisible(true);
+            CoachDAL coachDAL = new CoachDAL();
+            Coach coach = coachDAL.getCoachByName(nameToSearch);
+            if (coach != null) {
+                jTextField4.setText(coach.getcoachName());
+                jTextField5.setText(String.valueOf(coach.getAge()));
+                jTextField7.setText(coach.getAddress());
+                jTextField9.setText(coach.getSpecialist());
+                jTextField4.setVisible(true); jTextField5.setVisible(true);
+                jTextField7.setVisible(true); jTextField9.setVisible(true);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Coach not found: " + nameToSearch, "Search Coach", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
-
-            // Close the resources
-            resultSet.close();
-            statement.close();
-            Tools.dbConnection().close();
         } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
-  }
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed

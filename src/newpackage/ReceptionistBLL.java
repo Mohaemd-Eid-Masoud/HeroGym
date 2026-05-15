@@ -20,16 +20,24 @@ public class ReceptionistBLL {
             throw new BusinessException("Failed to Create Receptionist ", e);
         }
     }
-//           public void update (Receptionist Receptionist) throws BusinessException{
-//               try{
-//                   ReceptionistDAL.updateReceptionist(Receptionist);
-//               }
-//               catch(SQLException e){
-//                   throw new BusinessException("Failed to update Receptionist");
-//               }
-//           }
-          public void delete (Receptionist Receptionist)throws BusinessException, SQLException{
-              ReceptionistDAL.deleteReceptionist(Receptionist.getName());
-          }
+    public void update(Receptionist Receptionist) throws BusinessException {
+        try {
+            ReceptionistDAL.updateReceptionist(Receptionist);
+        } catch (SQLException e) {
+            throw new BusinessException("Failed to update Receptionist", e);
+        }
+    }
+
+    public Receptionist[] getAll() throws BusinessException {
+        try {
+            return ReceptionistDAL.getAllReceptionists();
+        } catch (SQLException e) {
+            throw new BusinessException("Failed to retrieve receptionists", e);
+        }
+    }
+
+    public void delete(Receptionist Receptionist) throws BusinessException, SQLException {
+        ReceptionistDAL.deleteReceptionist(Receptionist.getName());
+    }
           
 }

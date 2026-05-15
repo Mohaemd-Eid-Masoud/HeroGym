@@ -26,13 +26,13 @@ public class MemberBLL {
         
     }
 
-//    public Member[] getAllMembers() throws BusinessException {
-//        try {
-//            return memberDAL.getAllMembers();
-//        } catch (SQLException e) {
-//            throw new BusinessException("Failed to retrieve member.", e);
-//        }
-//    }
+    public Member[] getAllMembers() throws BusinessException {
+        try {
+            return memberDAL.getAllMembers();
+        } catch (SQLException e) {
+            throw new BusinessException("Failed to retrieve member.", e);
+        }
+    }
 
     public Member getMemberByName(String MemberName) throws BusinessException {
         try {
