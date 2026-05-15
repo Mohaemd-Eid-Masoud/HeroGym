@@ -4,6 +4,7 @@
  */
 package menuPackage;
 
+import WelcomePages.LoginP;
 import java.awt.Color;
 import javax.swing.JLabel;
 import modeloDesign.AnimateBTT;
@@ -203,7 +204,7 @@ public class MenuPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btt_pruebaOneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btt_pruebaOneMousePressed
@@ -240,8 +241,9 @@ public class MenuPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_iniAncestorMoved
 
     private void lbl_pruebaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_pruebaMouseClicked
-        // TODO add your handling code here:
-        
+        raventab.CourseTabs course = new raventab.CourseTabs();
+        course.setVisible(true);
+        dispose();
     }//GEN-LAST:event_lbl_pruebaMouseClicked
 
     private void lbl_pruebaOneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_pruebaOneMouseClicked
@@ -280,7 +282,7 @@ public class MenuPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPage().setVisible(true);
+                new LoginP().setVisible(true);
             }
         });
     }
@@ -305,4 +307,5 @@ public class MenuPage extends javax.swing.JFrame {
     public static javax.swing.JLabel lbl_pruebaOne;
     private nicemenu.PanelGradient panelGradient1;
     // End of variables declaration//GEN-END:variables
+
 }

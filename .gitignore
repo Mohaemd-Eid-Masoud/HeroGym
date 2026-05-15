@@ -1,0 +1,19 @@
+# NetBeans / Java build output
+build/
+dist/
+
+# Compiled Java files
+*.class
+
+# NetBeans private config
+nbproject/private/
+
+# Logs / temp files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database backups (optional but recommended)
+*.accdb~

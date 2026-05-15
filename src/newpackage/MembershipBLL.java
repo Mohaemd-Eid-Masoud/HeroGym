@@ -1,7 +1,7 @@
 package newpackage;
 
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class MembershipBLL {
@@ -47,9 +47,9 @@ public class MembershipBLL {
         }
     }
 
-    public void deleteMembership(Date startDate, Date endDate) {
+    public void deleteMembership(int membershipID) {
         try {
-            membershipDAL.deleteMembership(startDate, endDate);
+            membershipDAL.deleteMembership(membershipID);
             System.out.println("Membership deleted successfully.");
         } catch (SQLException e) {
             System.out.println("Failed to delete membership: " + e.getMessage());
