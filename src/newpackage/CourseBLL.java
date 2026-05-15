@@ -30,11 +30,11 @@ public class CourseBLL {
         }
     }
 
-    public Course getCourseById(int courseId) throws BusinessException {
+    public Course getCourseByName(String courseName) throws BusinessException {
         try {
-            return courseDAL.getCourseById(courseId);
+            return courseDAL.getCourseByName(courseName);
         } catch (SQLException e) {
-            throw new BusinessException("Failed to retrieve course by ID.", e);
+            throw new BusinessException("Failed to retrieve course by name.", e);
         }
     }
 
@@ -49,12 +49,9 @@ public class CourseBLL {
         }
     }
 
-    public void deleteCourse(int courseId) throws BusinessException {
-        // Perform any business validations or checks here
-        // ...
-
+    public void deleteCourse(String courseName) throws BusinessException {
         try {
-            courseDAL.deleteCourse(courseId);
+            courseDAL.deleteCourse(courseName);
         } catch (SQLException e) {
             throw new BusinessException("Failed to delete course.", e);
         }

@@ -2,7 +2,7 @@ package newpackage;
 
 public class Coach {
     private int age,coachID;
-    private String name, Address, Gender, Mail, BirthDate, StartDate, EndDate, experience, PhoneNum, shiftname,CourseName;
+    private String name, Address, Gender, Mail, BirthDate, StartDate, EndDate, experience, PhoneNum, shiftname, CourseName, userPassword;
     private double salary;
     private Course course;
 
@@ -137,18 +137,39 @@ public class Coach {
         this.course.setCourseName(courseName);
     }
 
-    
-    
+    public void setCoachID(int coachID) {
+        this.coachID = coachID;
+    }
+
     public int getCoachID() {
         return coachID;
     }
 
-    void setCoachName(String string) {
-        this.CourseName=course.getCourseName();
+    /** Alias getter used by CoachTabs */
+    public String getcoachName() {
+        return name;
     }
 
-    String getcoachName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /** Alias setter used by CoachTabs */
+    public void setcoachName(String name) {
+        this.name = name;
+    }
+
+    /** Maps to 'experience' column in tblCoach */
+    public String getSpecialist() {
+        return experience;
+    }
+
+    /** Maps to 'experience' column in tblCoach */
+    public void setSpecialist(String specialist) {
+        this.experience = specialist;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 }
- 

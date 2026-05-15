@@ -212,49 +212,27 @@ public class LoginP extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
-     if(evt.getSource().equals(btnLogin)){
-     
-                MenuPage M=new MenuPage();
-                M.setVisible(true);
-                dispose();
-           
-////        if(recep.getEmail().equals(Email))
-////            if(recep.getUserPassword().equals(pass)){
-////                System.out.println(recep.getUserPassword());
-////                    MenuPage l=new MenuPage();
-////                l.setVisible(true);
-////                dispose();
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        String email = txtEmail.getText().trim();
+        String pass = new String(txtPass.getPassword()).trim();
 
-     //ReceptionDAL recp=new ReceptionDAL();
-    String Email=txtEmail.getText();
-    String pass=txtPass.getText();
-    ReceptionistDAL recepDAL=new ReceptionistDAL(Tools.dbConnection());
-    ReceptionistBLL recepBLL=new ReceptionistBLL(recepDAL);
-    Receptionist recep=recepDAL.getReceptionistByEmail(Email);
-        System.out.println(recep.getEmail()+""+recep.getUserPassword());
-        
-////        if(recep.getEmail().equals(Email))
-////            if(recep.getUserPassword().equals(pass)){
-////                System.out.println(recep.getUserPassword());
-////                    MenuPage l=new MenuPage();
-////                l.setVisible(true);
-////                dispose();
-//}
-//         Receptionist recep=recepDAL.getReceptionistByEmail(email);
-//         System.out.println(recep.getEmail());
-//             if(recep.getEmail().equals(email)){
-//                 if(recep.getUserPassword().equals(pass)){
-//                     MenuPage menu=new MenuPage(); menu.setVisible(true);
-//                     dispose();
-//                 }
-//             }
-//         }else{
-//             JOptionPane.showMessageDialog(null, "Invalid email or password.");
-         
- 
- }          
-    }                                        
+        if (email.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter your email and password.", "Login", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        ReceptionistDAL recepDAL = new ReceptionistDAL(Tools.dbConnection());
+        Receptionist recep = recepDAL.getReceptionistByEmail(email);
+
+        if (recep != null && recep.getUserPassword() != null && recep.getUserPassword().equals(pass)) {
+            MenuPage menu = new MenuPage();
+            menu.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid email or password. Please try again.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            txtPass.setText("");
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
@@ -262,19 +240,19 @@ public class LoginP extends javax.swing.JFrame {
             System.exit(WIDTH);
             dispose();
         }
-    }                                        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
 //        if(evt.getSource().equals(txtEmail)){
 //            System.exit(WIDTH);
 //            dispose();
 //        }
-    }                                        
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void jLabel8AncestorAdded(javax.swing.event.AncestorEvent evt) {                                      
+    private void jLabel8AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel8AncestorAdded
         // TODO add your handling code here:
-    }                                     
+    }//GEN-LAST:event_jLabel8AncestorAdded
 
     /**
      * @param args the command line arguments

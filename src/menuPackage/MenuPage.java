@@ -4,6 +4,7 @@
  */
 package menuPackage;
 
+import WelcomePages.LoginP;
 import java.awt.Color;
 import javax.swing.JLabel;
 import modeloDesign.AnimateBTT;
@@ -78,7 +79,7 @@ public class MenuPage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Pristina", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Menu page");
-        Menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 80));
+        Menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 80));
 
         btt_inicio.setBackground(new java.awt.Color(255, 153, 153));
         btt_inicio.setColorGradient(new java.awt.Color(255, 51, 51));
@@ -95,10 +96,10 @@ public class MenuPage extends javax.swing.JFrame {
         lbl_ini.setForeground(new java.awt.Color(204, 204, 204));
         lbl_ini.setText("Coaches");
         lbl_ini.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
                 lbl_iniAncestorMoved(evt);
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -194,8 +195,6 @@ public class MenuPage extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("GYM");
         Menu.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 630, 80, 30));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\WIN(10)X64\\Desktop\\training.png")); // NOI18N
         Menu.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 110, -1, 550));
 
         getContentPane().add(Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 710));
@@ -205,7 +204,7 @@ public class MenuPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btt_pruebaOneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btt_pruebaOneMousePressed
@@ -234,7 +233,7 @@ public class MenuPage extends javax.swing.JFrame {
 
     private void lbl_iniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_iniMouseClicked
         // TODO add your handling code here:
-        CoachTabs coach=new CoachTabs(); coach.setVisible(true);
+        CoachTabs coach=new CoachTabs(); coach.setVisible(true); dispose();
     }//GEN-LAST:event_lbl_iniMouseClicked
 
     private void lbl_iniAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lbl_iniAncestorMoved
@@ -242,13 +241,14 @@ public class MenuPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_iniAncestorMoved
 
     private void lbl_pruebaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_pruebaMouseClicked
-        // TODO add your handling code here:
-        
+        raventab.CourseTabs course = new raventab.CourseTabs();
+        course.setVisible(true);
+        dispose();
     }//GEN-LAST:event_lbl_pruebaMouseClicked
 
     private void lbl_pruebaOneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_pruebaOneMouseClicked
         // TODO add your handling code here:
-        TraineeTabs traine=new TraineeTabs(); traine.setVisible(true);
+        TraineeTabs traine=new TraineeTabs(); traine.setVisible(true); dispose();
     }//GEN-LAST:event_lbl_pruebaOneMouseClicked
 
     /**
@@ -282,7 +282,7 @@ public class MenuPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPage().setVisible(true);
+                new LoginP().setVisible(true);
             }
         });
     }
@@ -307,4 +307,5 @@ public class MenuPage extends javax.swing.JFrame {
     public static javax.swing.JLabel lbl_pruebaOne;
     private nicemenu.PanelGradient panelGradient1;
     // End of variables declaration//GEN-END:variables
+
 }

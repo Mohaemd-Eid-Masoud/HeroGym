@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/content/HeroGymLastEdition/src/modeloDesign/AnimateBTT.java</file>
-            <file>file:/D:/content/HeroGymLastEdition/src/WelcomePages/SlideShowApp.java</file>
-            <file>file:/D:/content/HeroGymLastEdition/src/WelcomePages/LoginP.java</file>
-            <file>file:/D:/content/HeroGymLastEdition/src/menuPackage/MenuPage.java</file>
-            <file>file:/D:/content/HeroGymLastEdition/src/raventab/TraineeTabs.java</file>
-            <file>file:/D:/content/HeroGymLastEdition/src/img/login.jpg</file>
-            <file>file:/D:/content/HeroGymLastEdition/src/newpackage/LoginP.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/CourseBLL.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/MemberDAL.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/Membership.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/CourseDAL.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/Tools.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/Member.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/MemberBLL.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/CoachDAL.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/newpackage/MembershipBLL.java</file>
+            <file>file:/C:/Users/moham/OneDrive/Documents/HeroGymLastEdition/src/WelcomePages/LoginP.java</file>
         </group>
     </open-files>
 </project-private>
