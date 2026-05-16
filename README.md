@@ -27,4 +27,4 @@ This project uses Ant for its build system (`build.xml`).
 
 ## License
 
-[Add License Information Here]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
